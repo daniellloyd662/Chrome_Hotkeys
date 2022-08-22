@@ -15,5 +15,7 @@ function duplicateTab() {
     const query = { active: true, currentWindow: true };
     chrome.tabs.query(query, (tabs) => {
         chrome.tabs.create({ url: tabs[0].url, active: false });
+        
     });
+        console.log('click')
 }
