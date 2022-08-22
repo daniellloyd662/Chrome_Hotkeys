@@ -27,20 +27,23 @@ if (url.includes('youtube.com')){
 if (url.includes('google.com')){
     if (document.activeElement.nodeName !== "INPUT"){
 
-    if((e.key =="j" || e.key == "J") && current <resultsLinks.length){
+    if((e.key =="j" || e.key == "J") ){
+        if (current <resultsLinks.length-1){
         current++ 
         selectResult(current)
+        } else {
+            window.scrollBy(0,100) //Scrolls down when last comment is reached, allowing bottom of page to be viewed
+        }
 
     } else if ((e.key =="k" || e.key == "K") && current >0){
         current --
         selectResult(current)
-    } else if (e.key = 'm'){
-        console.log(document.activeElement)
-        console.log(document.activeElement.nodeName)
-           
-    }
+
+    //Below statements advance to next or previous page in google search results       
+    } else if (e.key  == 'l' || e.key == 'L'){
+        document.getElementById('pnnext').click()
+    } else if (e.key  == 'h' || e.key == 'H'){
+        document.getElementById('pnprev').click()
 
     }
-}
-
-}
+}}}
