@@ -22,11 +22,15 @@ function selectResult(index) {
   resultsLinks[index].focus();
   resultsLinks.forEach((element) => (element.style.color = ""));
   currentElement.style.color = "yellow";
+  console.log(currentElement);
 }
 
 window.onkeydown = function (e) {
   if (url.includes("youtube.com")) {
     resultsLinks = document.querySelectorAll('[id="video-title"]');
+    console.log(resultsLinks);
+
+    resultsLinks = [...resultsLinks].filter((link) => link.href); //Prevents bug that occurs when an existing yt page is open and a new tab is opened and searched in. Previous pages results load but without href
     if (document.activeElement.nodeName !== "INPUT") {
       if (e.altKey && (e.key == "L" || e.key == "l")) {
         document.getElementsByName("search_query")[0].select();
@@ -44,6 +48,8 @@ window.onkeydown = function (e) {
         } else {
           window.scrollBy(0, 100); //Scrolls down when last comment is reached, allowing bottom of page to be viewed
         }
+        e.preventDefault();
+        return false;
       } else if ((e.key == "k" || e.key == "K") && current > 0) {
         current--;
         selectResult(current);
